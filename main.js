@@ -4,11 +4,22 @@
 // Plays the entered song.
 // Repeats when the song is complete.
 //
-var promptAndPlay = function() {
-  var songString = prompt("Welcome to JukeBox!\nEnter a song to play:");
-  var song = parseSong(songString);
-  playSong(song, 500, promptAndPlay);
-};
-
-// Get things going.
-//promptAndPlay();
+//
+$(document).ready(function() {
+  var promptAndPlay = function() {
+    var songString = prompt("Welcome to JukeBox!\nEnter a song to play:");
+    var song = parseSong(songString);
+    $("button").html("Playing...");
+    $("button").attr("disabled",true);
+    playSong(song, 500, function(){
+      $("button").html("Play Song");
+      $("button").attr("disabled",false);
+    });
+  };
+  
+  // Get things going.
+  //promptAndPlay();
+  $("button").on("click", function(){ 
+    promptAndPlay();
+  });
+});
